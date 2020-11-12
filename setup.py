@@ -15,6 +15,7 @@ def main():
         author_email="daniel.you@jerichoapps.org",
         description="Classifying r/relationships post titles by gender.",
         long_description=_LONG_DESCRIPTION,
+        long_description_content_type="text/markdown",
         url="https://github.com/youdaniel/iama",
         packages=setuptools.find_packages(),
         license="Apache 2.0",
@@ -25,6 +26,13 @@ def main():
             "Operating System :: OS Independent",
             "Programming Language :: Python :: 3",
             "Programming Language :: Python :: 3 :: Only",
+        ],
+        install_requires=[
+            "nltk",
+            "setuptools",
+            "scikit-learn",
+            "joblib",
+            "numpy",
         ],
     )
 
