@@ -10,7 +10,7 @@ with open(os.path.join(_THIS_DIR, "README.md"), encoding="utf-8") as f:
 def main():
     setuptools.setup(
         name="iama",
-        version="0.1",
+        version="0.1.1",
         author="Daniel You",
         author_email="daniel.you@jerichoapps.org",
         description="Classifying r/relationships post titles by gender.",
