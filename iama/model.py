@@ -6,7 +6,7 @@ import pkg_resources
 
 from typing import Optional, Tuple
 
-from features import (
+from .features import (
     tok,
     get_feature_1,
     get_feature_2,
