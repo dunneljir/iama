@@ -1,0 +1,5 @@
+setuptools
+nltk
+scikit-learn
+joblib
+numpy
