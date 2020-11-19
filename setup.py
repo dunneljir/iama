@@ -1,4 +1,5 @@
 import os
+
 import setuptools
 
 _THIS_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -10,7 +11,7 @@ with open(os.path.join(_THIS_DIR, "README.md"), encoding="utf-8") as f:
 def main():
     setuptools.setup(
         name="iama",
-        version="0.1.1",
+        version="0.1.2",
         author="Daniel You",
         author_email="daniel.you@jerichoapps.org",
         description="Classifying r/relationships post titles by gender.",
@@ -27,13 +28,7 @@ def main():
             "Programming Language :: Python :: 3",
             "Programming Language :: Python :: 3 :: Only",
         ],
-        install_requires=[
-            "nltk",
-            "setuptools",
-            "scikit-learn",
-            "joblib",
-            "numpy",
-        ],
+        install_requires=["nltk", "setuptools", "scikit-learn", "numpy"],
     )
 
 
