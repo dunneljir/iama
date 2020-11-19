@@ -1,11 +1,11 @@
 import re
-
 from typing import List
+
 from nltk.tokenize import regexp_tokenize
 
 
 def tok(sentence: str) -> List[str]:
-    regex_str = "[\[\(\{][a-zA-Z]* *\/*,*-* *[0-9][0-9]? *\/*,*-* *[a-zA-Z]*[\]\)\}]|\w+"
+    regex_str = r"[\[\(\{][a-zA-Z]* *\/*,*-* *[0-9][0-9]? *\/*,*-* *[a-zA-Z]*[\]\)\}]|\w+"
     return regexp_tokenize(sentence, regex_str)
 
 
@@ -40,19 +40,3 @@ def get_feature_5(token: str) -> str:
     """Returns the alphabetic part of a token"""
     alphabetic = re.sub(r"[^A-Za-z]+", "", token.lower())
     return alphabetic if alphabetic != "" else "..."
-
-
-def token_gender(token: str) -> str:
-    """Determines if the gender of a token is female or male."""
-    alphabetic = re.sub(r"[^A-Za-z]+", "", token.lower())
-    if alphabetic == "m":
-        return "male"
-    elif alphabetic == "f":
-        return "female"
-    else:
-        return None
-
-
-def token_age(token: str) -> int:
-    """Returns the numerical part of token."""
-    return re.sub("[^0-9]", "", token)

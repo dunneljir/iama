@@ -1,22 +1,18 @@
 import re
-import pickle
+from typing import Optional
+
 import joblib
 import numpy as np
 import pkg_resources
 
-from typing import Optional, Tuple
-
 from .features import (
-    tok,
     get_feature_1,
     get_feature_2,
     get_feature_3,
     get_feature_4,
     get_feature_5,
-    token_gender,
-    token_age,
+    tok,
 )
-
 
 REGEX_STR = (
     r"[\[\(\{] *[a-zA-Z]* *\/*,*-* *[0-9][0-9]? *\/*,*-* *[a-zA-Z]* *[\]\)\}]"
@@ -25,7 +21,7 @@ REGEX_STR = (
 
 def generate_features(title: str, index: str):
     """
-    Given a string generate features necessary for prediction.
+    Given a string, generate features necessary for prediction.
     """
     token = tok(title)[index]
     feature_1 = get_feature_1(title, index)
@@ -48,11 +44,10 @@ class Iama:
         self._model = None
         self._dv = None
         self.load()
-        pass
 
-    def predict(self, title: str) -> Optional[Tuple[int, str]]:
+    def predict(self, title: str) -> Optional[str]:
         """
-        Given a title, predict the token (e.g. [27M]) that refers 
+        Given a title, predict the token (e.g. [27M]) that refers
         to the post's author.
         """
         X = []
@@ -71,18 +66,15 @@ class Iama:
         X_encoded = self._dv.transform(X)
         probs_one = self._model.predict_log_proba(X_encoded)[:, 1]
         idx_max = np.argmax(probs_one)
-        answer = tokens[idx_max]
-        return (token_age(answer), token_gender(answer))
+        return tokens[idx_max]
 
     def load(self):
-        with open(
-            pkg_resources.resource_filename(__name__, "models/model.pkl"), "rb"
-        ) as model:
-            self._model = pickle.load(model)
+        self._model = joblib.load(
+            pkg_resources.resource_filename(__name__, "models/iama.pkl")
+        )
         self._dv = joblib.load(
             pkg_resources.resource_filename(
                 __name__, "models/dict_vectorizer.pkl"
             ),
         )
         return self
-
