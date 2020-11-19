@@ -1,5 +1,7 @@
 # iama
 
+[![PyPI version](https://badge.fury.io/py/iama.svg)](https://pypi.org/project/iama/)
+
 _iama_ is a classifier for r/relationships titles. Consider the following title:
 
 ```{.bash}
